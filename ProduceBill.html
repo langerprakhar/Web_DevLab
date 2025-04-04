@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Produce Bill</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <h2>Gadget Billing Page</h2>
@@ -24,30 +25,32 @@
     <input type="number" id="qty" min="1" placeholder="Quantity">
     <br><br>
 
-    <button onclick="produceBill()">Produce Bill</button>
+    <button id="generateBill">Produce Bill</button>
 
     <script>
-        function produceBill() {
-            const qty = parseInt(document.getElementById("qty").value);
-            if (!qty || qty < 1) {
-                alert("Please enter a valid quantity.");
-                return;
-            }
+        $(document).ready(function() {
+            $("#generateBill").click(function() {
+                const qty = parseInt($("#qty").val());
+                if (!qty || qty < 1) {
+                    alert("Please enter a valid quantity.");
+                    return;
+                }
 
-            const checkboxes = document.querySelectorAll(".item:checked");
-            if (checkboxes.length === 0) {
-                alert("Please select at least one item.");
-                return;
-            }
+                const selectedItems = $(".item:checked");
+                if (selectedItems.length === 0) {
+                    alert("Please select at least one item.");
+                    return;
+                }
 
-            let total = 0;
-            checkboxes.forEach(cb => {
-                if (cb.value === "Mobile") total += 10000 * qty;
-                if (cb.value === "Laptop") total += 30000 * qty;
+                let total = 0;
+                selectedItems.each(function() {
+                    if ($(this).val() === "Mobile") total += 10000 * qty;
+                    if ($(this).val() === "Laptop") total += 30000 * qty;
+                });
+
+                alert("Total amount: ₹" + total);
             });
-
-            alert("Total amount: ₹" + total);
-        }
+        });
     </script>
 </body>
 </html>
