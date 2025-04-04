@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Birthday Card Generator</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
         body {
             font-family: Verdana, sans-serif;
@@ -69,7 +70,6 @@
     <h2>Customize Your Birthday Card</h2>
     
     <div class="container">
-        <!-- FORM -->
         <div class="form-container">
             <label for="bgColor">Choose a background color:</label>
             <select id="bgColor">
@@ -111,10 +111,9 @@
 
             <br><br>
             
-            <button onclick="updateCard()">Update</button>
+            <button id="updateButton">Update</button>
         </div>
 
-        <!-- BIRTHDAY CARD -->
         <div class="card" id="birthdayCard">
             <div class="message" id="cardMessage">Happy Birthday, and many more</div>
             <div class="image-container" id="imageContainer">
@@ -124,30 +123,26 @@
     </div>
 
     <script>
-        function updateCard() {
-            // Get selected values
-            let bgColor = document.getElementById("bgColor").value;
-            let font = document.getElementById("font").value;
-            let fontSize = document.getElementById("fontSize").value;
-            let greetingText = document.getElementById("greeting").value;
-            let borderStyle = document.querySelector('input[name="border"]:checked').value;
-            let addImage = document.getElementById("addImage").checked;
+        $(document).ready(function() {
+            $("#updateButton").click(function() {
+                let bgColor = $("#bgColor").val();
+                let font = $("#font").val();
+                let fontSize = $("#fontSize").val();
+                let greetingText = $("#greeting").val();
+                let borderStyle = $('input[name="border"]:checked').val();
+                let addImage = $("#addImage").is(":checked");
 
-            // Apply changes to card
-            let card = document.getElementById("birthdayCard");
-            card.style.backgroundColor = bgColor;
-            card.style.fontFamily = font;
-            card.style.border = borderStyle === "none" ? "none" : `4px ${borderStyle} black`;
+                $("#birthdayCard").css({
+                    "background-color": bgColor,
+                    "font-family": font,
+                    "border": borderStyle === "none" ? "none" : `4px ${borderStyle} black`
+                });
 
-            // Update greeting message
-            let message = document.getElementById("cardMessage");
-            message.style.fontSize = fontSize + "px";
-            message.innerText = greetingText;
-
-            // Show/hide image
-            let imageContainer = document.getElementById("imageContainer");
-            imageContainer.style.display = addImage ? "block" : "none";
-        }
+                $("#cardMessage").css("font-size", fontSize + "px").text(greetingText);
+                
+                $("#imageContainer").toggle(addImage);
+            });
+        });
     </script>
 
 </body>
