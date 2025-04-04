@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Table and Image Animation</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 300px;
+        }
+        td {
+            border: 1px solid black;
+            padding: 10px;
+        }
+        tr:nth-child(even) {
+            background-color: #e10606;
+        }
+        #container {
+            position: relative;
+            left: 100%;
+            transition: left 3s linear;
+        }
+    </style>
+</head>
+<body>
+    <h2>Table and Image Animation</h2>
+    <div id="container">
+        <table>
+            <tr><td>Data 1</td><td>Data 2</td><td>Data 3</td></tr>
+            <tr><td>Data 4</td><td>Data 5</td><td>Data 6</td></tr>
+            <tr><td>Data 7</td><td>Data 8</td><td>Data 9</td></tr>
+            <tr><td>Data 10</td><td>Data 11</td><td>Data 12</td></tr>
+
+        </table>
+        <img src="C:\Users\Prakhar\projects\helloworld\images (1).jpeg" alt="Sample Image">
+    </div>
+    <button onclick="moveLeft()">Move Right to Left</button>
+
+    <script>
+        function moveLeft() {
+            document.getElementById("container").style.left = "0%";
+        }
+    </script>
+</body>
+</html>
