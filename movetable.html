@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Table and Image Animation</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
         table {
             border-collapse: collapse;
@@ -17,7 +18,6 @@
         #container {
             position: relative;
             left: 100%;
-            transition: left 3s linear;
         }
     </style>
 </head>
@@ -29,16 +29,17 @@
             <tr><td>Data 4</td><td>Data 5</td><td>Data 6</td></tr>
             <tr><td>Data 7</td><td>Data 8</td><td>Data 9</td></tr>
             <tr><td>Data 10</td><td>Data 11</td><td>Data 12</td></tr>
-
         </table>
         <img src="C:\Users\Prakhar\projects\helloworld\images (1).jpeg" alt="Sample Image">
     </div>
-    <button onclick="moveLeft()">Move Right to Left</button>
+    <button id="moveBtn">Move Right to Left</button>
 
     <script>
-        function moveLeft() {
-            document.getElementById("container").style.left = "0%";
-        }
+        $(document).ready(function() {
+            $("#moveBtn").click(function() {
+                $("#container").animate({ left: "0%" }, 3000);
+            });
+        });
     </script>
 </body>
 </html>
